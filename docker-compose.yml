@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      context: ./php8
+      dockerfile: Dockerfile
+
+    image: example-app
+    container_name: example-app
+    restart: unless-stopped
+    working_dir: /var/www/
+
+    ports:
+      - 8000:80
+      - 4430:443
+
+    volumes:
+      - D:\example-app:/var/www/html
