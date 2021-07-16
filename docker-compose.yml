@@ -16,4 +16,4 @@ services:
       - 4430:443
 
     volumes:
-      - D:\example-app:/var/www/html
+      - /media/gspadilha/EXTERNO_SSD/example-app:/var/www/html
