@@ -23,12 +23,12 @@ class LoginController extends Controller
         $u = $request->input('username');
         $s = $request->input('password');
 
-        list($sucesso, $conexao) = OracleConexaoPorUsuario::conectar($u, $s);
+        $sucesso = OracleConexaoPorUsuario::conectar($u, $s);
 
         if ($sucesso) {
             return redirect('/home');
         }
-        dd('erro', $conexao);
+
         return redirect('/login');
     }
 

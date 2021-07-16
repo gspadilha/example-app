@@ -3,13 +3,13 @@
 namespace App\Gambiarras;
 
 use Exception;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
-use PDO;
+//use Illuminate\Support\Facades\Config;
+//use Illuminate\Support\Facades\DB;
+//use PDO;
 
 class OracleConexaoPorUsuario
 {
-    public static function conectar(string $usuario = '', string $senha = '')
+    public static function conectar(string $usuario = '', string $senha = ''): bool
     {
         if (trim($usuario) === '') {
             $usuario = session('username');
@@ -20,7 +20,7 @@ class OracleConexaoPorUsuario
         }
 
         try {
-            Config::set("database.connections.oracle", [
+            /*Config::set("database.connections.oracle", [
                 "driver" => "oracle",
                 "database" => env('DB_DATABASE', ''),
                 "hostname" => env('DB_HOST', ''),
@@ -31,18 +31,18 @@ class OracleConexaoPorUsuario
                 ],
             ]);
 
-            $conexao = DB::connection('oracle');
+            $conexao = DB::connection('oracle');*/
 
             session([
                 'username' => $usuario,
                 'password' => $senha,
             ]);
 
-            return [true, $conexao];
+            return true;
         } catch (Exception $e) {
-            return [false, $e->getMessage()];
+            return false;
         }
 
-        return [false, null];
+        return false;
     }
 }

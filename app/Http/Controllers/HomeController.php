@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Gambiarras\OracleConexaoPorUsuario;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -22,11 +24,15 @@ class HomeController extends Controller
      */
     public function home()
     {
-        list($sucesso, $conexao) = OracleConexaoPorUsuario::conectar();
+        try {
+            $data = DB::select('SELECT * FROM TESTE');
+            echo 'tabela criada no usuário porto';
+        } catch (Exception $e) {
+            echo 'não funcionou<br/>' . $e->getMessage();
+            die;
+        }
 
-        $data = $conexao->select('SELECT * FROM TESTE');
-
-        dd($data);
+        die;
 
         return view('home');
     }
